@@ -1,0 +1,352 @@
+{% extends "base.html" %} {% block content %}
+<style>
+  .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #ccc;
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    /* border: 1px solid #ccc; */
+    border-top: none;
+  }
+</style>
+{% for i in parent %}
+<h1 class="text-center m-3">{{i.name}}</h1>
+<div class="row">
+  <div class="col-lg-4 mr-1 border-right mt-5">
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address">
+          <b> Address </b>
+        </label>
+      </div>
+      <div class="col-lg-8">
+        <label> {{i.contact_address}}</label>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address">
+          <b> Phone </b>
+        </label>
+      </div>
+      <div class="col-lg-8">
+        <label> {{i.phone}}</label>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address">
+          <b> Mobile </b>
+        </label>
+      </div>
+      <div class="col-lg-8">
+        <label> {{i.mobile}}</label>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address">
+          <b>Email</b>
+        </label>
+      </div>
+      <div class="col-lg-8">
+        <label> {{i.email}}</label>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address">
+          <b>Website</b>
+        </label>
+      </div>
+      <div class="col-lg-8">
+        <label> {{i.website}}</label>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address">
+          <b> Tags</b>
+        </label>
+      </div>
+      {% for name in cotegory %}
+        {% for data in name  %}
+        <div class="col-lg-8">
+            <label> {{data.name}}</label>
+        </div>
+        {% endfor %}
+       
+      {% endfor %}
+      
+    </div>
+    <div class="row m-2">
+      <div class="col-lg-3">
+        <label for="address" class="form-label">
+          <b>Tax ID</b>
+        </label>
+      </div>
+      <div class="col-lg-8">
+        <label> {{i.vat}}</label>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+  <div class="col-lg-8">
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'London')">
+        Child Account
+      </button>
+      <button class="tablinks" onclick="openCity(event, 'Paris')">
+        Sales & Purchase
+      </button>
+      <button class="tablinks" onclick="openCity(event, 'Tokyo')">
+        Internal notes
+      </button>
+    </div>
+    <div id="London" class="tabcontent" style="display: block">
+      {% for i in child %} 
+      {% for j in i %}
+      <a
+        data-id="{{j.id}}"
+        data-name="{{j.name}}"
+        data-job="{{j.function}}"
+        data-title="{{j.title}}"
+        data-note="{{j.comment}}"
+        data-email="{{j.email}}"
+        data-phone="{{j.phone}}"
+        data-mobile="{{j.mobile}}"
+        id="mylink{{j.id}}"
+      >
+        <div class="card mb-3" style="max-width: 400px" type="submit">
+          <div class="row g-0">
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" id="name" name="name" value="{{i.id}}">
+                  {{j.name}}
+                  <p>{{j.id}}</p>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted " name="display_name">
+                  {{j.display_name}}
+                </h6>
+                <p class="card-text " name="email">{{j.email}}</p>
+                <p class="card-text" name="phone">{{j.phone}}</p>
+                <p class="card-text ">
+                  <small class="text-muted">{{j.contact_address}}</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endfor %} {% endfor %}
+    </div>
+
+    <div id="Paris" class="tabcontent">
+      <div class="row">
+        <div class="col-lg-6">
+          <h4>Sales</h4>
+          <div class="row">
+            <div class="col-lg-2">
+              <label for="salesperson"> Salesperson </label>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" id="salesperson" class="form-control" />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-lg-2">
+              <label for="salesperson"> Sales Team </label>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" id="salesperson" class="form-control" />
+            </div>
+          </div>
+          <h4 class="mt-2">Misc</h4>
+          <div class="row">
+            <div class="col-lg-2">
+              <label for="salesperson"> Reference </label>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" id="salesperson" class="form-control" />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-lg-2">
+              <label for="salesperson"> Industrys </label>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" id="salesperson" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h1>Purchase</h1>
+        </div>
+      </div>
+    </div>
+
+    <div id="Tokyo" class="tabcontent">
+      <textarea rows="4" cols="100" class="form-control"></textarea>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contact</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class='row'>
+            <div class='col-lg-6'>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Contact Name</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='name2' class="form-label"></label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Title</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='title2' class="form-label"></label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Job Position</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='job2' class="form-label"></label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Notes</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='notes2' class="form-label"></label>
+                    </div>
+                </div>
+            </div>
+            <div class='col-lg-6'>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Email</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='email2' class="form-label"></label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Phone</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='phone2' class="form-label"></label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <label class="form-label">Mobile</label>
+                    </div>
+                    <div class='col-lg-6'>
+                        <label id='mobile2' class="form-label"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += "  ";
+  }
+
+  $("a[id^=mylink]").click(function () {
+    //var id = $("a[id^=mylink]").data('id')
+    let id = $(this).data("id");
+    let name = $(this).data("name");
+    let job = $(this).data("job");
+    let title = $(this).data("title");
+    let note = $(this).data("note");
+    let email = $(this).data("email");
+    let phone = $(this).data("phone");
+    let mobile = $(this).data("mobile");
+   //document.getElementById("name").innerHTML = name;
+   $('#name2').html(name)
+   $('#job2').html(job)
+   $('#title2').html(title)
+   $('#notes2').html(note)
+    $('#email2').html(email)
+   $('#phone2').html(phone)
+   $('#mobile2').html(mobile)
+   
+    $("#exampleModal").modal("show");
+    console.log(id, name, job, title, note, email, phone, mobile);
+    // alert(id,name,job,title,note,email,phone,mobile)
+  });
+</script>
+{% endblock content %}

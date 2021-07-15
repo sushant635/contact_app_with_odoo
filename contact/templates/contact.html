@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<style>
+.data{
+    display:flex;
+    width:100%;
+    
+}
+a:link,a:visited{
+    color: black;
+      text-decoration: none;
+
+}
+
+</style>
+    {% comment %} <form method='POST' action='/view/'> {% endcomment %}
+    <div class='data'>
+    <div class="container mt-3">
+
+    {% for i in contact %}
+        {% comment %} {% for j  in range(6) %} {% endcomment %}
+        
+       
+    {% comment %} <div>{{i.name}}</div> {% endcomment %}
+           {% comment %} <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{i.name}}<p>{{i.id}}</P></h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{i.display_name}}</h6>
+                 <p class="card-text">{{i.email}}</p>
+                 <p class='card-text'>{{i.phone}}</p>
+                {{i.contact_address}}
+               
+              
+            </div> {% endcomment %}
+            {% comment %} </div> {% endcomment %}
+            {% comment %} <a href='/view/'> {% endcomment %}
+            
+            {% comment %} <button type=submit> {% endcomment %}
+            <a href='/detail/{{i.id}}/'>
+            <div class="card mb-3" style="max-width: 420px;" type='submit'>
+                <div class="row g-0">
+                    {% comment %} <div class="col-md-4">
+                    <img src="http://localhost:8069/web/image?model=hr_employees&id=20&field=image_1920/" class="img-fluid rounded-start" alt  >
+                    </div> {% endcomment %}
+                    {% csrf_token %}
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" id='name' name='name' value='{{i.id}}'>{{i.name}}<p>{{i.id}}</P></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" name='display_name'>{{i.display_name}}</h6>
+                        <p class="card-text" name='email'>{{i.email}}</p>
+                        <p class='card-text' name='phone'>{{i.phone}}</p>
+                        <p class="card-text"><small class="text-muted">{{i.contact_address}}</small></p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% comment %} </button> {% endcomment %}
+            
+            {% comment %} </a> {% endcomment %}
+         {% comment %} {% endfor %} {% endcomment %}
+    {% endfor %}
+    </div>
+    </div>
+    {% comment %} </form> {% endcomment %}
+
+<script>
+//function data(){
+  // var id = $('#name').val();
+   //alert(id)
+
+//}
+</script>
+{% endblock content %}
